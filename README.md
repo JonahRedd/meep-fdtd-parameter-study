@@ -69,7 +69,7 @@ meep-fdtd-parameter-study/
 
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/meep-fdtd-parameter-study.git
+git clone https://github.com/JonahRedd/meep-fdtd-parameter-study.git
 cd meep-fdtd-parameter-study
 
 # Create conda environment with Meep
@@ -170,7 +170,7 @@ If you use this code in your research, please cite:
   title        = {Systematic Parameter Sensitivity Analysis for FDTD Simulations in Meep},
   year         = {2026},
   institution  = {Cadi Ayyad University},
-  howpublished = {\url{https://github.com/[username]/meep-fdtd-parameter-study}}
+  howpublished = {\url{https://github.com/JonahRedd/meep-fdtd-parameter-study}}
 }
 ```
 
