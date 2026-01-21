@@ -189,6 +189,15 @@ def plot_resolution_convergence(mie: Dict, cavity: Dict, waveguide: Dict, output
     ax2.set_ylabel('Q-factor', color='#9C27B0')
     ax2.tick_params(axis='y', labelcolor='#9C27B0')
     
+    # Annotate Q-factor non-monotonicity (peak at intermediate resolution)
+    Q_max_idx = np.argmax(Qs)
+    if 0 < Q_max_idx < len(Qs) - 1:  # Non-monotonic peak exists
+        ax2.annotate('Q peak\n(non-monotonic)', 
+                     xy=(resolutions[Q_max_idx], Qs[Q_max_idx]),
+                     xytext=(resolutions[Q_max_idx] * 1.3, Qs[Q_max_idx] * 0.85),
+                     fontsize=9, color='#9C27B0',
+                     arrowprops=dict(arrowstyle='->', color='#9C27B0', lw=1.5))
+    
     ax.set_title('(b) Photonic Cavity')
     ax.set_xscale('log', base=2)
     ax.set_xticks(resolutions)
@@ -383,6 +392,15 @@ def plot_cost_accuracy_tradeoff(cavity: Dict, waveguide: Dict, output_dir: Path)
     error[error == 0] = 1e-10
     
     ax.loglog(runtimes, error, 'o-', linewidth=2, markersize=10, color='#FF9800')
+    
+    # Annotate runtime anomaly at lowest resolution (highest runtime with high error)
+    min_res_idx = 0  # Lowest resolution is first in sorted list
+    if runtimes[min_res_idx] > runtimes[min_res_idx + 1]:  # Runtime anomaly exists
+        ax.annotate('Runtime spike\\n(dispersion)', 
+                    xy=(runtimes[min_res_idx], error[min_res_idx]),
+                    xytext=(runtimes[min_res_idx] * 0.3, error[min_res_idx] * 0.5),
+                    fontsize=9, color='#E65100',
+                    arrowprops=dict(arrowstyle='->', color='#E65100', lw=1.5))
     
     for i, (r, rt, err) in enumerate(zip(resolutions, runtimes, error)):
         ax.annotate(f'{r} px/μm', (rt * 1.1, err), fontsize=9)
