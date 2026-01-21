@@ -1,0 +1,27 @@
+{
+  "config": {
+    "resolution": 80,
+    "wavelength": 1.0,
+    "cylinder_radius": 0.5,
+    "cylinder_n": 2.0,
+    "pml_thickness": 1.0,
+    "padding": 1.0,
+    "simulation_time": 50,
+    "use_subpixel": true,
+    "courant": 0.5,
+    "pixels_per_wavelength": 80.0,
+    "cell_size": 5.0
+  },
+  "runtime_seconds": 7.525568008422852,
+  "scattered_flux": {
+    "top": 0.34322362223395514,
+    "bottom": 0.3432236222339554,
+    "left": -1.9214890760424579,
+    "right": 1.2400619219410816,
+    "total": 0.00502009036653428
+  },
+  "analytical": {
+    "sigma_scattering": 1.2480686496639288,
+    "sigma_extinction": 1.248068649663929
+  }
+}

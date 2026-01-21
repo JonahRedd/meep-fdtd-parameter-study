@@ -1,0 +1,506 @@
+nohup: ignoring input
+
+======================================================================
+RESOLUTION SWEEP - SUBPIXEL ON
+======================================================================
+
+>>> Resolution 80 px/μm - Subpixel ON
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 80 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: True
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000335217 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 80
+time for set_epsilon = 0.381271 s
+-----------
+on time step 1416 (time=8.85), 0.0028259 s/step
+on time step 2828 (time=17.675), 0.00283419 s/step
+field decay(t = 20.00625): 0.19165668615457082 / 0.19165668615457082 = 1.0
+on time step 4159 (time=25.9938), 0.00300555 s/step
+on time step 5451 (time=34.0688), 0.0030979 s/step
+on time step 6356 (time=39.725), 0.00442362 s/step
+field decay(t = 40.0125): 0.07804298781932953 / 0.19165668615457082 = 0.4072020099334702
+on time step 7557 (time=47.2313), 0.00333239 s/step
+on time step 8526 (time=53.2875), 0.0041299 s/step
+on time step 9109 (time=56.9313), 0.00687223 s/step
+field decay(t = 60.018750000000004): 3.0027653330333198e-15 / 0.19165668615457082 = 1.5667417575046634e-14
+run 0 finished at t = 60.018750000000004 (9603 timesteps)
+      Runtime: 34.25 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000425816 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 80
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.486829 s
+-----------
+on time step 1110 (time=6.9375), 0.00360467 s/step
+on time step 2268 (time=14.175), 0.00345499 s/step
+field decay(t = 20.00625): 0.02280396633387894 / 0.02280396633387894 = 1.0
+on time step 3356 (time=20.975), 0.00367698 s/step
+on time step 4440 (time=27.75), 0.00369013 s/step
+on time step 5518 (time=34.4875), 0.00371188 s/step
+field decay(t = 40.0125): 0.02134851169040307 / 0.02280396633387894 = 0.9361753730835166
+on time step 6750 (time=42.1875), 0.00324859 s/step
+on time step 7947 (time=49.6688), 0.00334225 s/step
+on time step 8673 (time=54.2063), 0.00551293 s/step
+field decay(t = 60.018750000000004): 2.5361851477921384e-05 / 0.02280396633387894 = 0.0011121684318680252
+on time step 9855 (time=61.5938), 0.00338678 s/step
+on time step 11057 (time=69.1063), 0.00333115 s/step
+on time step 11788 (time=73.675), 0.00547235 s/step
+field decay(t = 80.01875000000001): 7.755140020868519e-08 / 0.02280396633387894 = 3.400785594630096e-06
+on time step 12904 (time=80.65), 0.00358452 s/step
+on time step 14069 (time=87.9313), 0.00343675 s/step
+on time step 14995 (time=93.7188), 0.00432241 s/step
+on time step 15791 (time=98.6938), 0.00503167 s/step
+field decay(t = 100.025): 3.6700652158329784e-10 / 0.02280396633387894 = 1.6093977521710814e-08
+run 0 finished at t = 100.025 (16004 timesteps)
+      Runtime: 61.63 s
+
+Results saved to: ../../results/mie_transmission/subpixel_on/transmission_res80_subpixelon.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8621
+  Extinction (1-T) = 0.1379
+  Analytical Q_ext = 1.2481
+Total runtime: 95.87 s
+
+======================================================================
+RESOLUTION SWEEP - SUBPIXEL OFF
+======================================================================
+
+>>> Resolution 10 px/μm - Subpixel OFF
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 10 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: False
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000142097 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 10
+time for set_epsilon = 0.00352311 s
+-----------
+field decay(t = 20.05): 0.18877431324618257 / 0.18877431324618257 = 1.0
+field decay(t = 40.1): 0.07283143559852467 / 0.18877431324618257 = 0.3858122132514101
+field decay(t = 60.150000000000006): 3.708799468549126e-14 / 0.18877431324618257 = 1.9646737973891825e-13
+run 0 finished at t = 60.150000000000006 (1203 timesteps)
+      Runtime: 0.13 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 9.60827e-05 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 10
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.00380898 s
+-----------
+field decay(t = 20.05): 0.06379295497507444 / 0.06379295497507444 = 1.0
+field decay(t = 40.1): 0.048275696220517354 / 0.06379295497507444 = 0.7567559182574302
+field decay(t = 60.150000000000006): 4.672291673142737e-06 / 0.06379295497507444 = 7.324149939391148e-05
+field decay(t = 80.2): 6.216375637531601e-08 / 0.06379295497507444 = 9.744611516993531e-07
+run 0 finished at t = 80.2 (1604 timesteps)
+      Runtime: 0.27 s
+
+Results saved to: ../../results/mie_transmission/subpixel_off/transmission_res10_subpixeloff.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.9037
+  Extinction (1-T) = 0.0963
+  Analytical Q_ext = 1.2481
+Total runtime: 0.40 s
+
+>>> Resolution 20 px/μm - Subpixel OFF
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 20 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: False
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000227928 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 20
+time for set_epsilon = 0.0226309 s
+-----------
+field decay(t = 20.025000000000002): 0.19192924750731546 / 0.19192924750731546 = 1.0
+field decay(t = 40.025000000000006): 0.0684755412518964 / 0.19192924750731546 = 0.35677491649252896
+field decay(t = 60.050000000000004): 8.78960871614257e-15 / 0.19192924750731546 = 4.579608803920075e-14
+run 0 finished at t = 60.050000000000004 (2402 timesteps)
+      Runtime: 0.62 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000144005 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 20
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.0143318 s
+-----------
+field decay(t = 20.025000000000002): 0.023458301086631737 / 0.023458301086631737 = 1.0
+field decay(t = 40.025000000000006): 0.020587259311064695 / 0.023458301086631737 = 0.8776108395503895
+field decay(t = 60.050000000000004): 3.502902225617602e-05 / 0.023458301086631737 = 0.0014932463406797233
+field decay(t = 80.05000000000001): 1.0039384227196782e-07 / 0.023458301086631737 = 4.2796723386409084e-06
+field decay(t = 100.075): 9.755367108203332e-10 / 0.023458301086631737 = 4.1585991552315165e-08
+run 0 finished at t = 100.075 (4003 timesteps)
+      Runtime: 2.58 s
+
+Results saved to: ../../results/mie_transmission/subpixel_off/transmission_res20_subpixeloff.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8639
+  Extinction (1-T) = 0.1361
+  Analytical Q_ext = 1.2481
+Total runtime: 3.19 s
+
+>>> Resolution 40 px/μm - Subpixel OFF
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 40 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: False
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000251055 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 40
+time for set_epsilon = 0.063448 s
+-----------
+field decay(t = 20.012500000000003): 0.1914767979498354 / 0.1914767979498354 = 1.0
+field decay(t = 40.025000000000006): 0.07201884052344726 / 0.1914767979498354 = 0.37612306710035603
+on time step 4403 (time=55.0375), 0.000908619 s/step
+field decay(t = 60.0375): 5.858037921331702e-15 / 0.1914767979498354 = 3.059398310424241e-14
+run 0 finished at t = 60.0375 (4803 timesteps)
+      Runtime: 4.41 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000246048 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 40
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.060935 s
+-----------
+field decay(t = 20.012500000000003): 0.021772843226554112 / 0.021772843226554112 = 1.0
+field decay(t = 40.025000000000006): 0.02015906714016734 / 0.021772843226554112 = 0.925881242537097
+on time step 3605 (time=45.0625), 0.00110958 s/step
+field decay(t = 60.0375): 3.0321009561064627e-05 / 0.021772843226554112 = 0.0013926068013058208
+field decay(t = 80.05000000000001): 8.108693754655579e-08 / 0.021772843226554112 = 3.7242236442350504e-06
+on time step 7340 (time=91.75), 0.00107103 s/step
+field decay(t = 100.0625): 3.9185874256724587e-10 / 0.021772843226554112 = 1.7997591701268294e-08
+run 0 finished at t = 100.0625 (8005 timesteps)
+      Runtime: 8.82 s
+
+Results saved to: ../../results/mie_transmission/subpixel_off/transmission_res40_subpixeloff.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8603
+  Extinction (1-T) = 0.1397
+  Analytical Q_ext = 1.2481
+Total runtime: 13.23 s
+
+>>> Resolution 80 px/μm - Subpixel OFF
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 80 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: False
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000662088 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 80
+time for set_epsilon = 0.259005 s
+-----------
+on time step 919 (time=5.74375), 0.00435354 s/step
+on time step 1851 (time=11.5688), 0.00429431 s/step
+on time step 2754 (time=17.2125), 0.00443203 s/step
+field decay(t = 20.00625): 0.19165668615457082 / 0.19165668615457082 = 1.0
+on time step 3649 (time=22.8063), 0.00447409 s/step
+on time step 4300 (time=26.875), 0.00614734 s/step
+on time step 5420 (time=33.875), 0.00357245 s/step
+field decay(t = 40.0125): 0.07804298781932953 / 0.19165668615457082 = 0.4072020099334702
+on time step 6533 (time=40.8313), 0.00359798 s/step
+on time step 7601 (time=47.5063), 0.00374806 s/step
+on time step 8785 (time=54.9062), 0.00338123 s/step
+field decay(t = 60.018750000000004): 3.0027653330333198e-15 / 0.19165668615457082 = 1.5667417575046634e-14
+run 0 finished at t = 60.018750000000004 (9603 timesteps)
+      Runtime: 39.56 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000459909 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 80
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.22382 s
+-----------
+on time step 950 (time=5.9375), 0.00421187 s/step
+on time step 2131 (time=13.3188), 0.00338758 s/step
+field decay(t = 20.00625): 0.02175059237194329 / 0.02175059237194329 = 1.0
+on time step 3285 (time=20.5312), 0.003467 s/step
+on time step 3777 (time=23.6063), 0.00813442 s/step
+on time step 4473 (time=27.9563), 0.00575203 s/step
+on time step 5366 (time=33.5375), 0.00448597 s/step
+on time step 6302 (time=39.3875), 0.00427385 s/step
+field decay(t = 40.0125): 0.020341917231269012 / 0.02175059237194329 = 0.9352350907696947
+on time step 7384 (time=46.15), 0.00369868 s/step
+on time step 8525 (time=53.2812), 0.00350665 s/step
+on time step 9534 (time=59.5875), 0.00396451 s/step
+field decay(t = 60.018750000000004): 2.8083812922993144e-05 / 0.02175059237194329 = 0.001291174623787224
+on time step 10292 (time=64.325), 0.00528066 s/step
+on time step 10911 (time=68.1938), 0.00646676 s/step
+on time step 12025 (time=75.1562), 0.00359352 s/step
+field decay(t = 80.01875000000001): 7.472431687503498e-08 / 0.02175059237194329 = 3.435507208135812e-06
+on time step 13024 (time=81.4), 0.00400494 s/step
+on time step 14380 (time=89.875), 0.00295171 s/step
+on time step 15752 (time=98.45), 0.002916 s/step
+field decay(t = 100.025): 3.40647918339325e-10 / 0.02175059237194329 = 1.5661546707055964e-08
+run 0 finished at t = 100.025 (16004 timesteps)
+      Runtime: 65.02 s
+
+Results saved to: ../../results/mie_transmission/subpixel_off/transmission_res80_subpixeloff.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8601
+  Extinction (1-T) = 0.1399
+  Analytical Q_ext = 1.2481
+Total runtime: 104.57 s
+
+======================================================================
+PML THICKNESS SWEEP
+======================================================================
+
+>>> PML thickness = 0.5 μm
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 40 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: True
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000154972 s
+Working in 2D dimensions.
+Computational cell is 8 x 8 x 0 with resolution 40
+time for set_epsilon = 0.0719221 s
+-----------
+field decay(t = 20.012500000000003): 0.19147883159937193 / 0.19147883159937193 = 1.0
+field decay(t = 40.025000000000006): 0.07201900590777384 / 0.19147883159937193 = 0.3761199361110477
+field decay(t = 60.0375): 6.257680114900567e-15 / 0.19147883159937193 = 3.268079328995181e-14
+run 0 finished at t = 60.0375 (4803 timesteps)
+      Runtime: 1.50 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000155926 s
+Working in 2D dimensions.
+Computational cell is 8 x 8 x 0 with resolution 40
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.088371 s
+-----------
+field decay(t = 20.012500000000003): 0.023658852544768027 / 0.023658852544768027 = 1.0
+field decay(t = 40.025000000000006): 0.021984667799427003 / 0.023658852544768027 = 0.9292364351917288
+field decay(t = 60.0375): 2.616547307222043e-05 / 0.023658852544768027 = 0.0011059485248791883
+field decay(t = 80.05000000000001): 8.301863403931697e-08 / 0.023658852544768027 = 3.508988184537965e-06
+field decay(t = 100.0625): 4.278330939693115e-10 / 0.023658852544768027 = 1.8083425354621583e-08
+run 0 finished at t = 100.0625 (8005 timesteps)
+      Runtime: 2.73 s
+
+Results saved to: ../../results/mie_transmission/pml_sweep/transmission_res40_subpixelon.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8641
+  Extinction (1-T) = 0.1359
+  Analytical Q_ext = 1.2481
+Total runtime: 4.23 s
+
+>>> PML thickness = 1.0 μm
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 40 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: True
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000178814 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 40
+time for set_epsilon = 0.0949411 s
+-----------
+field decay(t = 20.012500000000003): 0.1914767979498354 / 0.1914767979498354 = 1.0
+field decay(t = 40.025000000000006): 0.07201884052344726 / 0.1914767979498354 = 0.37612306710035603
+field decay(t = 60.0375): 5.858037921331702e-15 / 0.1914767979498354 = 3.059398310424241e-14
+run 0 finished at t = 60.0375 (4803 timesteps)
+      Runtime: 2.19 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000186205 s
+Working in 2D dimensions.
+Computational cell is 9 x 9 x 0 with resolution 40
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.112818 s
+-----------
+field decay(t = 20.012500000000003): 0.02365777025310863 / 0.02365777025310863 = 1.0
+field decay(t = 40.025000000000006): 0.021983649749226487 / 0.02365777025310863 = 0.929235913360763
+on time step 4505 (time=56.3125), 0.000887982 s/step
+field decay(t = 60.0375): 2.6165165016992297e-05 / 0.02365777025310863 = 0.0011059860983117882
+field decay(t = 80.05000000000001): 8.301828008832384e-08 / 0.02365777025310863 = 3.5091337518342518e-06
+field decay(t = 100.0625): 4.2793262512923394e-10 / 0.02365777025310863 = 1.8088459755542838e-08
+run 0 finished at t = 100.0625 (8005 timesteps)
+      Runtime: 6.32 s
+
+Results saved to: ../../results/mie_transmission/pml_sweep/transmission_res40_subpixelon.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8641
+  Extinction (1-T) = 0.1359
+  Analytical Q_ext = 1.2481
+Total runtime: 8.51 s
+
+>>> PML thickness = 2.0 μm
+============================================================
+MIE SCATTERING - TRANSMISSION SPECTRUM
+============================================================
+Resolution: 40 px/μm
+Wavelength: 1.0 μm
+Cylinder: r=0.5 μm, n=2.0
+Subpixel: True
+============================================================
+
+[1/2] Running reference simulation (no cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000365973 s
+Working in 2D dimensions.
+Computational cell is 11 x 11 x 0 with resolution 40
+time for set_epsilon = 0.163141 s
+-----------
+on time step 1544 (time=19.3), 0.00280845 s/step
+field decay(t = 20.012500000000003): 0.19147671138801298 / 0.19147671138801298 = 1.0
+field decay(t = 40.025000000000006): 0.07201900129288995 / 0.19147671138801298 = 0.3761240767653928
+on time step 4409 (time=55.1125), 0.00139632 s/step
+field decay(t = 60.0375): 5.651166260422624e-15 / 0.19147671138801298 = 2.951359577599474e-14
+run 0 finished at t = 60.0375 (4803 timesteps)
+      Runtime: 8.96 s
+
+[2/2] Running scattering simulation (with cylinder)...
+-----------
+Initializing structure...
+time for choose_chunkdivision = 0.000275135 s
+Working in 2D dimensions.
+Computational cell is 11 x 11 x 0 with resolution 40
+     cylinder, center = (0,0,0)
+          radius 0.5, height 1e+20, axis (0, 0, 1)
+          dielectric constant epsilon diagonal = (4,4,4)
+time for set_epsilon = 0.170176 s
+-----------
+field decay(t = 20.012500000000003): 0.023657636662059188 / 0.023657636662059188 = 1.0
+field decay(t = 40.025000000000006): 0.021983489172939713 / 0.023657636662059188 = 0.9292343731102954
+on time step 3328 (time=41.6), 0.0012021 s/step
+field decay(t = 60.0375): 2.6165140636219736e-05 / 0.023657636662059188 = 0.001105991313079127
+on time step 5851 (time=73.1375), 0.00158543 s/step
+field decay(t = 80.05000000000001): 8.3018193622585e-08 / 0.023657636662059188 = 3.509149912498445e-06
+field decay(t = 100.0625): 4.276640504287022e-10 / 0.023657636662059188 = 1.8077209339957706e-08
+run 0 finished at t = 100.0625 (8005 timesteps)
+      Runtime: 12.10 s
+
+Results saved to: ../../results/mie_transmission/pml_sweep/transmission_res40_subpixelon.json
+
+============================================================
+RESULTS SUMMARY
+============================================================
+At λ = 1.0 μm:
+  Transmission T = 0.8641
+  Extinction (1-T) = 0.1359
+  Analytical Q_ext = 1.2481
+Total runtime: 21.06 s
+
+======================================================================
+ALL SWEEPS COMPLETE!
+======================================================================
+
+Elapsed run time = 251.2501 s
