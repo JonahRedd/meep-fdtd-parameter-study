@@ -8,7 +8,7 @@ The scattering cross-section is computed by:
 2. Second simulation: with cylinder, measuring total flux
 3. Scattered power = difference in flux through monitors
 
-Author: [Your Name]
+Author: Saïd ECH-CHADI & Youness ECHCHADI
 Date: 2026-01-19
 """
 

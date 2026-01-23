@@ -4,7 +4,7 @@ Mie Scattering Analysis - Resolution Convergence
 Analyzes results from resolution sweep simulations and generates
 convergence plots comparing subpixel smoothing ON vs OFF.
 
-Author: [Your Name]
+Author: Saïd ECH-CHADI & Youness ECHCHADI
 Date: 2026-01-19
 """
 

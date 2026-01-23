@@ -8,8 +8,10 @@
 
 ## Authors
 
-**Saïd ECH-CHADI** & **Youness ECHCHADI**  
-*Cadi Ayyad University, Marrakech, Morocco*
+- **Saïd ECH-CHADI**  
+  *Cadi Ayyad University, Marrakech, Morocco*
+- **Youness ECHCHADI**  
+  *Nexus Academia (Research Group)*
 
 ---
 
@@ -169,8 +171,9 @@ If you use this code in your research, please cite:
   author       = {Ech-Chadi, Saïd and Echchadi, Youness},
   title        = {Systematic Parameter Sensitivity Analysis for FDTD Simulations in Meep},
   year         = {2026},
-  institution  = {Cadi Ayyad University},
-  howpublished = {\url{https://github.com/JonahRedd/meep-fdtd-parameter-study}}
+  institution  = {Cadi Ayyad University and Nexus Academia},
+  howpublished = {\url{https://github.com/JonahRedd/meep-fdtd-parameter-study}},
+  note         = {Contact: youness.echchadi@nexus-academia.org}
 }
 ```
 

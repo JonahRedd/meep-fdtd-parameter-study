@@ -3,7 +3,7 @@ Mie Transmission Analysis - Convergence Study
 ==============================================
 Analyzes transmission-based scattering results.
 
-Author: [Your Name]
+Author: Saïd ECH-CHADI & Youness ECHCHADI
 Date: 2026-01-19
 """
 
