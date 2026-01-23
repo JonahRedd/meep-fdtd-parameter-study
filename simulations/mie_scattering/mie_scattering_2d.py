@@ -13,7 +13,7 @@ Parameters under investigation:
 - PML thickness
 - Simulation time
 
-Author: [Your Name]
+Author: Saïd ECH-CHADI & Youness ECHCHADI
 Date: 2026-01-19
 """
 
