@@ -71,7 +71,7 @@
 
 % --- Abstract ---
 \begin{abstract}
-The Finite-Difference Time-Domain (\fdtd{}) method is a cornerstone of computational electromagnetics, yet practical guidelines for simulation parameter selection remain largely experience-driven. This study presents a systematic sensitivity analysis of key \meep{} simulation parameters—including spatial resolution, perfectly matched layer (\pml{}) configuration, and temporal convergence criteria—across three canonical electromagnetic problems: Mie scattering, resonant cavity modes, and waveguide transmission. By quantifying error convergence against analytical solutions and high-resolution benchmarks, we establish empirically-grounded recommendations for minimizing numerical dispersion while optimizing computational cost. Our results demonstrate that subpixel smoothing restores second-order convergence, enabling comparable accuracy at half the resolution. We provide a reproducible validation framework and practical guidelines applicable to a broad class of electromagnetic simulations.
+Selecting appropriate parameters for Finite-Difference Time-Domain (\fdtd{}) simulations often relies on rules of thumb rather than documented evidence. We address this gap by measuring how \meep{} results change when varying grid resolution, absorbing-layer depth, and run duration across three test problems: cylindrical scattering (Mie theory benchmark), a one-dimensional photonic-crystal cavity, and slab-waveguide transmission. Our data show that 40 grid points per wavelength typically achieve below 1\% error, while absorber layers as thin as half a wavelength perform identically to much thicker ones. We also observe that coarse grids can paradoxically increase runtime because of slower field decay. All scripts and raw outputs are openly available, letting other researchers replicate or extend these tests.
 
 \vspace{1em}
 \noindent\textbf{Keywords:} FDTD, Meep, convergence testing, numerical dispersion, PML, electromagnetic simulation, parameter sensitivity
@@ -86,11 +86,11 @@ The Finite-Difference Time-Domain (\fdtd{}) method is a cornerstone of computati
 \label{sec:introduction}
 % =============================================================================
 
-Electromagnetic wave simulations are fundamental to the design and analysis of photonic devices, antennas, and metamaterials. Among numerical methods for solving Maxwell's equations, the Finite-Difference Time-Domain (\fdtd{}) technique stands out for its versatility, intuitive formulation, and ability to handle complex, dispersive materials in arbitrary geometries \citep{Taflove2005}. Since its introduction by Yee in 1966, \fdtd{} has become one of the most widely used approaches in computational electromagnetics.
+Designing photonic components, antennas, or metamaterials increasingly depends on accurate electromagnetic field solvers. The Finite-Difference Time-Domain (\fdtd{}) algorithm, first published by Yee in 1966, remains popular because it discretizes Maxwell's equations on a simple staggered grid and steps forward in time without solving large matrix systems \citep{Taflove2005}. This directness makes \fdtd{} easy to implement and naturally suited to broadband or transient problems.
 
-\meep{} (MIT Electromagnetic Equation Propagation) is an open-source \fdtd{} software package that has gained widespread adoption in the photonics research community \citep{Oskooi2010}. It supports advanced features including subpixel averaging for improved interface accuracy \citep{Farjadpour2006}, flexible boundary conditions via perfectly matched layers (\pml{}), material dispersion models, and scriptable simulation control through Python. These capabilities make \meep{} an attractive tool for both research prototyping and systematic parameter studies.
+\meep{}, developed at MIT, offers a free and scriptable \fdtd{} implementation that many photonics labs now use routinely \citep{Oskooi2010}. Its feature set includes subpixel averaging to sharpen curved boundaries \citep{Farjadpour2006}, configurable absorbing layers, built-in dispersion models, and a Python front-end. Because users can automate large parameter sweeps, \meep{} lends itself well to the kind of convergence study we undertake here.
 
-Despite the power of \fdtd{} implementations like \meep{}, a persistent challenge in the field is the lack of comprehensive, quantitative guidelines for selecting simulation parameters. Critical choices—such as spatial resolution, \pml{} thickness, computational domain size, and simulation duration—significantly impact both accuracy and computational cost. While heuristics exist (e.g., ``use 10--20 grid points per wavelength''), these rules of thumb are often insufficient for high-accuracy applications or novel geometries. Moreover, the interactions between parameters are rarely documented: for instance, inadequate resolution may require thicker \pml{} layers to compensate for numerical dispersion effects.
+A recurring frustration for \fdtd{} practitioners is the absence of hard numbers on how fine to mesh, how thick to make absorbing boundaries, or how long to run before trusting the output. Common advice ("ten to twenty cells per wavelength") can be too vague when sub-percent accuracy matters or when the geometry has fine features. Worse, parameters may interact in non-obvious ways: a coarse mesh might need a thicker absorber to hide reflections that finer grids would not produce.
 
 The \meep{} documentation emphasizes that convergence testing is essential, advising users to ``check several parameters to ensure that results are converged'' \citep{MeepDocs2024}. Community discussions echo this guidance, recommending systematic doubling of resolution and \pml{} thickness until results stabilize \citep{MeepDiscussion2023}. However, published studies typically report only final ``converged'' results without showing the convergence data itself, leaving a gap in the shared knowledge base.
 
@@ -130,7 +130,7 @@ The remainder of this paper is organized as follows. Section~\ref{sec:background
 
 \subsection{The FDTD Method}
 
-The \fdtd{} method solves Maxwell's curl equations by discretizing space and time on a staggered Yee grid \citep{Yee1966}. Electric and magnetic field components are updated alternately in a leapfrog scheme, enabling explicit time-stepping without matrix inversion. This simplicity comes at the cost of numerical dispersion: the discrete phase velocity depends on propagation direction and frequency, introducing errors that accumulate over long propagation distances or simulation times.
+Yee's 1966 scheme places electric and magnetic field samples on interleaved grid points and updates them in alternating half-steps \citep{Yee1966}. No matrices need inverting, so memory stays low and parallelization is straightforward. The trade-off is numerical dispersion: waves on the discrete lattice travel at a speed that depends on direction and frequency, and this error grows with propagation distance or simulation length.
 
 For a uniform grid with spacing $\Delta x$ and time step $\Delta t$, the Courant-Friedrichs-Lewy (CFL) stability condition requires:
 \begin{equation}
@@ -140,7 +140,7 @@ where $c$ is the speed of light and $d$ is the spatial dimensionality. \meep{} u
 
 \subsection{Sources of Numerical Error}
 
-Several factors contribute to \fdtd{} simulation error:
+Four main error sources affect \fdtd{} accuracy:
 
 \begin{itemize}
     \item \textbf{Spatial discretization:} Insufficient resolution leads to numerical dispersion and ``staircasing'' of curved or oblique interfaces on the Cartesian grid.
@@ -151,9 +151,9 @@ Several factors contribute to \fdtd{} simulation error:
 
 \subsection{Prior Work on Convergence Analysis}
 
-\citet{Taflove2005} provide extensive discussion of \fdtd{} accuracy, recommending 10--20 cells per wavelength for typical problems. \citet{Oskooi2010} demonstrated \meep{}'s capabilities but focused on features rather than systematic convergence testing. The \meep{} documentation includes examples showing resolution and \pml{} convergence for specific cases \citep{MeepDocs2024}, and community discussions provide practical guidance \citep{MeepDiscussion2023}.
+Textbooks such as \citet{Taflove2005} suggest 10--20 cells per wavelength for routine work, while the original \meep{} paper \citep{Oskooi2010} showcased features without exhaustive convergence data. Online tutorials and forum threads offer scattered advice \citep{MeepDocs2024, MeepDiscussion2023}, but few peer-reviewed articles tabulate error versus resolution across multiple problem types.
 
-Studies comparing \fdtd{} to analytical solutions—particularly Mie scattering—have been used to validate implementations \citep{Bohren1983}. However, comprehensive parameter sensitivity analyses covering multiple scenarios and parameter interactions remain scarce in the published literature. Recent work by \citet{Sulemani2024} applied \meep{} to photonic crystal bandgap calculations, noting the importance of convergence testing but not systematically documenting parameter effects.
+Mie scattering from cylinders and spheres provides a convenient analytical reference \citep{Bohren1983}, and some authors have validated specific codes this way. Yet side-by-side sweeps of resolution, absorber thickness, and run time remain uncommon. \citet{Sulemani2024} recently computed photonic-crystal bands in \meep{} and mentioned convergence checks, but did not publish the underlying sweep data.
 
 
 % =============================================================================
@@ -163,14 +163,14 @@ Studies comparing \fdtd{} to analytical solutions—particularly Mie scattering�
 
 \subsection{Validation Framework}
 
-Our approach follows a structured sensitivity analysis:
+We follow a straightforward recipe:
 \begin{enumerate}
-    \item Select test scenarios with known analytical solutions or well-converged reference results.
-    \item Identify key simulation parameters and define sweep ranges.
-    \item Run parameter sweeps, varying one parameter at a time while holding others at conservative (fine) settings.
-    \item Compute error metrics against reference solutions.
-    \item Analyze convergence order and identify saturation points.
-    \item Record computational cost (runtime, memory) for cost-accuracy trade-off analysis.
+    \item Pick problems whose answers are known exactly or can be computed to high precision.
+    \item List the parameters to vary (resolution, absorber depth, etc.) and their test values.
+    \item Sweep one parameter at a time, keeping the others at safe (fine) settings.
+    \item Compare each run to the reference and record the discrepancy.
+    \item Plot error versus parameter to see where gains level off.
+    \item Log wall-clock time so users can weigh accuracy against cost.
 \end{enumerate}
 
 \subsection{Test Scenarios}
@@ -231,7 +231,7 @@ For quantitative comparison, we use:
 \label{sec:results}
 % =============================================================================
 
-This section presents the parameter sensitivity results for each test scenario. All simulations were conducted using \meep{} version 1.31.0 on a Linux system via WSL2. Source code and data are available in our reproducibility repository.
+Below we report how accuracy and runtime change with resolution and absorber thickness for each test case. All runs used \meep{} 1.31.0 under WSL2 on a desktop PC. Scripts and output files are posted in the linked repository.
 
 \subsection{Scenario 1: Mie Scattering}
 
@@ -258,7 +258,7 @@ Resolution (px/$\mu$m) & \multicolumn{2}{c}{Extinction (1-T)} & \multicolumn{2}{
 \end{tabular}
 \end{table}
 
-The results reveal that extinction converges to approximately 0.144 at high resolution. Notably, subpixel smoothing OFF converged faster in this case, achieving sub-1\% error by 40~px/$\mu$m, while subpixel ON showed slightly slower convergence. This counterintuitive result may be attributed to the specific geometry and wavelength ratio.
+The results reveal that extinction converges to approximately 0.144 at high resolution. Interestingly, subpixel smoothing OFF converged faster in this case, achieving sub-1\% error by 40~px/$\mu$m, while subpixel ON showed slightly slower convergence. This counterintuitive result may be attributed to the specific geometry and wavelength ratio.
 
 \subsubsection{PML Thickness}
 
@@ -383,11 +383,11 @@ Figure~\ref{fig:cross_scenario} presents the unified convergence analysis across
 \label{sec:discussion}
 % =============================================================================
 
-This section synthesizes our findings into practical guidelines and discusses implications for \fdtd{} simulation practice.
+We now distill the numerical evidence into take-away rules and discuss caveats.
 
 \subsection{Resolution Requirements}
 
-Our results establish quantitative resolution requirements for different accuracy targets:
+Table~\ref{tab:recommendations} translates our data into minimum-resolution guidance:
 
 \begin{table}[H]
 \centering
@@ -404,11 +404,11 @@ $<0.1\%$ error & $\geq$80 px/$\mu$m & $\geq$80 px/$\mu$m & $\geq$80 px/$\mu$m \\
 \end{tabular}
 \end{table}
 
-A universal recommendation of \textbf{40 pixels per wavelength} emerges as the ``sweet spot'' providing sub-1\% accuracy with reasonable computational cost. This aligns with the upper range of traditional heuristics (10--20 px/$\lambda$) but provides quantitative justification.
+Across all three problems, \textbf{40 cells per wavelength} kept errors below 1\% without excessive compute time. This sits above the classic ``10--20'' rule but finally puts a measured number behind the advice.
 
 \subsection{PML Configuration: Less is More}
 
-Perhaps the most striking finding is the complete insensitivity to PML thickness across all scenarios. Even at 0.5$\lambda$ (the minimum tested), no measurable degradation in accuracy was observed. This challenges common practice of using conservative (thick) PML layers and suggests that:
+Surprisingly, absorber depth had no detectable effect on any of our outputs. Half-wavelength layers matched results from four-wavelength layers to four decimal places. This contradicts the cautious habit of padding simulations with thick absorbers and implies:
 
 \begin{enumerate}
     \item For well-resolved simulations, numerical reflections from PML are dominated by discretization errors rather than PML absorption.
@@ -426,7 +426,7 @@ Contrary to expectations based on convergence order theory \citep{Farjadpour2006
     \item Geometry-specific effects: The cylinder radius and wavelength ratio may favor the unsmoothed Yee grid alignment.
     \item Cancellation of errors: Staircasing errors may partially cancel in symmetric geometries where opposing interface discretizations offset each other.
     \item Limited resolution range: The second-order asymptotic benefits of subpixel smoothing become more pronounced at higher resolutions ($>$100 px/$\lambda$) than we tested, as demonstrated in \citet{Farjadpour2006}.
-    \item Staircasing invisibility in far-field metrics: While staircasing artifacts are visible in near-field plots at material interfaces, the extinction cross-section---being a far-field integrated quantity---may be less sensitive to these localized errors.
+    \item Staircasing invisibility in far-field metrics: While staircasing artifacts are visible in near-field plots at material interfaces, the extinction cross-section, being a far-field integrated quantity, may be less sensitive to these localized errors.
 \end{itemize}
 
 We recommend \textbf{enabling subpixel smoothing} as the default, particularly for geometries with curved or oblique interfaces, but suggest users verify its benefit for their specific geometry through convergence testing.
@@ -455,7 +455,7 @@ This study has several limitations that should inform interpretation:
 
 Based on our findings, we propose the following workflow for \fdtd{} simulations in \meep{}:
 
-\begin{tcolorbox}[colback=blue!5!white, colframe=blue!50!black, title=\textbf{Best Practices Workflow for FDTD Simulations}, fonttitle=\bfseries]
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!50!black, coltitle=black, title=\textbf{Recommended Workflow for FDTD Simulations}, fonttitle=\bfseries]
 \textbf{1. Geometry Setup}
 \begin{itemize}[leftmargin=*, nosep]
     \item Define computational domain with adequate margin around structures
@@ -488,11 +488,11 @@ Based on our findings, we propose the following workflow for \fdtd{} simulations
 \label{sec:conclusion}
 % =============================================================================
 
-This study presented a systematic parameter sensitivity analysis for \fdtd{} simulations using the \meep{} software package. By examining three canonical electromagnetic problems—Mie scattering, resonant cavity modes, and waveguide transmission—we established quantitative guidelines for simulation parameter selection.
+We swept resolution, absorber depth, and related settings in \meep{} across three reference problems and recorded how accuracy and runtime responded. The measurements let us back up practical advice with hard data.
 
 \subsection{Key Findings}
 
-Our principal findings are:
+The main lessons are:
 
 \begin{enumerate}
     \item \textbf{Resolution}: A minimum of 40 pixels per wavelength provides sub-1\% accuracy across all tested scenarios, with diminishing returns at higher resolutions.
@@ -503,22 +503,22 @@ Our principal findings are:
     
     \item \textbf{Parameter independence}: Across all scenarios, PML thickness had no measurable interaction with resolution—a well-resolved simulation does not require thicker PML compensation.
     
-    \item \textbf{Runtime paradox}: Notably, lower-resolution simulations can yield longer runtimes due to increased numerical dispersion and slower field decay—contrary to common intuition that coarser grids are always faster.
+    \item \textbf{Runtime paradox}: Lower-resolution simulations can yield longer runtimes due to increased numerical dispersion and slower field decay, contrary to the common intuition that coarser grids are always faster.
 \end{enumerate}
 
 \subsection{Contributions}
 
-This work contributes:
+In summary, we offer:
 \begin{itemize}
-    \item A reproducible validation framework for \fdtd{} parameter sensitivity analysis
-    \item Quantitative convergence data filling a gap in the published literature
-    \item Practical guidelines distilled from systematic experimentation rather than heuristics
-    \item Open-source simulation scripts enabling community verification and extension
+    \item A repeatable test suite for probing \fdtd{} parameter effects
+    \item Tabulated error-vs-parameter data that journals have seldom published
+    \item Concrete rules derived from measurement, not folklore
+    \item Publicly available code so others can check or extend the work
 \end{itemize}
 
 \subsection{Future Work}
 
-Several directions merit further investigation:
+Open questions include:
 
 \begin{itemize}
     \item Extension to 3D geometries where computational cost makes parameter optimization more critical, particularly for photonic crystal structures \citep{Joannopoulos2008}
@@ -531,7 +531,7 @@ Several directions merit further investigation:
 
 \subsection{Closing Remarks}
 
-Electromagnetic simulation has become indispensable in photonics research and device design. Yet the accuracy of computational results depends critically on parameter choices that are rarely documented or justified. By providing systematic convergence data and practical guidelines, this study aims to improve the reliability and reproducibility of \fdtd{} simulations. We encourage the community to adopt convergence testing as standard practice and to share parameter sensitivity data alongside published results.
+Good simulation practice means knowing how sensitive your answer is to the settings you chose. By publishing sweep data rather than just final numbers, we hope to nudge the community toward routine convergence checks and open sharing of parameter studies.
 
 All simulation code, raw data, and analysis scripts are available at: \url{https://github.com/JonahRedd/meep-fdtd-parameter-study}.
 
