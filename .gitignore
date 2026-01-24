@@ -134,3 +134,6 @@ fields-*.h5
 *.pdf
 # iThenticate reports
 *_IA_writing_report.pdf
+
+# Paper/manuscript files
+paper/
