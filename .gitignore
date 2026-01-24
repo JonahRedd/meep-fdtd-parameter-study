@@ -133,3 +133,4 @@ fields-*.h5
 *.fdb_latexmk
 *.pdf
 
+!paper/main.pdf
