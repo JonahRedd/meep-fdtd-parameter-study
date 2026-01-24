@@ -118,20 +118,3 @@ fields-*.h5
 *.temp
 *.bak
 *.backup
-
-# -----------------------------------------------------------------------------
-# LaTeX Build Artifacts
-# -----------------------------------------------------------------------------
-*.aux
-*.bbl
-*.blg
-*.log
-*.out
-*.toc
-*.synctex.gz
-*.fls
-*.fdb_latexmk
-*.pdf
-
-# Paper/manuscript files
-paper/
