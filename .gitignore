@@ -132,3 +132,5 @@ fields-*.h5
 *.fls
 *.fdb_latexmk
 *.pdf
+# iThenticate reports
+*_IA_writing_report.pdf
